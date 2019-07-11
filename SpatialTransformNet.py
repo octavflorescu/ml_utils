@@ -1,4 +1,6 @@
-from .SpatialTransformNetwork import *
+import torch
+import torch.nn as nn
+import torch.optim as optim
 
 class SpatialTransformNetwork(nn.Module):
     def __init__(self, in_channels):
@@ -16,15 +18,15 @@ class SpatialTransformNetwork(nn.Module):
 
         # Regressor for the 3 * 2 affine matrix
         self.fc_loc = nn.Sequential(
-            Spatial_Pyramid_Pool([3, 1], pooling_type=nn.AvgPool2d),
-            nn.Linear(100, 32),
+            nn.AdaptiveAvgPool2d(1), Flatten(),
+            nn.Linear(10, 32),
             nn.ReLU(True),
             nn.Linear(32, 3 * 2)
         )
 
         # Initialize the weights/bias with identity transformation
-        self.fc_loc[3].weight.data.zero_()
-        self.fc_loc[3].bias.data.copy_(torch.tensor([1, 0, 0, 0, 1, 0], dtype=torch.float))
+        self.fc_loc[4].weight.data.zero_()
+        self.fc_loc[4].bias.data.copy_(torch.tensor([1, 0, 0, 0, 1, 0], dtype=torch.float))
 
     # Spatial transformer network forward function
     def stn(self, x):
