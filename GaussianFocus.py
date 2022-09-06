@@ -1,3 +1,6 @@
+import PIL
+import numpy as np
+
 def dnorm(x, mu, sd):
     return 1 / (np.sqrt(2 * np.pi) * sd) * np.e ** (-np.power((x - mu) / sd, 2) / 2)
 
