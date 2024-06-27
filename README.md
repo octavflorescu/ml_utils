@@ -8,6 +8,9 @@ Modules
 - Spatial Pyramid Pooling (@pytorch)
 - Spatial Transform Network (@pytorch)
 
+LrSched
+- CosineAnnealRestartLRScheduler (@pytorch) - custom control of bottom
+
 Loss
 - CustomFocalLoss (@pytorch)
 
